@@ -103,4 +103,6 @@ int main(){
         }
         else visited.insert(pos);
     }
+
+    cout << "No" << endl;
 }
