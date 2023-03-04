@@ -69,30 +69,30 @@ int func(int x)
     }
     return ret;
 }
+
 int main(){
-    const int mod = 998244353;
-    int n;
-    cin >> n;
-    unsigned int a[n], b[n];
+    int n, m, ans_count = 0;
+    cin >> n >> m;
 
-    for (int i=0;i<n;i++) cin >> a[i] >> b[i];
-
-    int dp[n][2];
-
-    dp[0][0] = 1;
-    dp[0][1] = 1;
-
-    for(int i=1;i<n;i++){
-        dp[i][0] = (a[i]!=a[i-1])? dp[i-1][0] : 0;
-        dp[i][0] += (a[i]!=b[i-1])? dp[i-1][1] : 0;
-        dp[i][0] %= mod;
-
-        dp[i][1] = (b[i]!=a[i-1])? dp[i-1][0] : 0;
-        dp[i][1] += (b[i]!=b[i-1])? dp[i-1][1] : 0;
-        dp[i][1] %= mod;
+    int a[m], ans[n];
+    bool re[n];
+    for(int i=0;i<n;i++) re[i] = 0;
+    for(int i=0;i<m;i++){
+        cin >> a[i];
+        re[a[i]-1] = 1;
     }
 
-    cout << (dp[n-1][0] + dp[n-1][1]) % mod << endl;
+    int l = 1, r;
 
-    return 0;
+    while(ans_count<n){
+        r = l;
+        while(re[r-1]) r++;
+        for(int i=r;i>l-1;i--){
+            ans[ans_count] = i;
+            ans_count++;
+        }
+        l = r + 1;
+    }
+    for(int i=0;i<n-1;i++) cout << ans[i] << ' ';
+    cout << ans[n-1] << endl;
 }

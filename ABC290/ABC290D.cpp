@@ -70,29 +70,10 @@ int func(int x)
     return ret;
 }
 int main(){
-    const int mod = 998244353;
-    int n;
-    cin >> n;
-    unsigned int a[n], b[n];
+    int t, n, d, k;
+    cin >> t;
 
-    for (int i=0;i<n;i++) cin >> a[i] >> b[i];
-
-    int dp[n][2];
-
-    dp[0][0] = 1;
-    dp[0][1] = 1;
-
-    for(int i=1;i<n;i++){
-        dp[i][0] = (a[i]!=a[i-1])? dp[i-1][0] : 0;
-        dp[i][0] += (a[i]!=b[i-1])? dp[i-1][1] : 0;
-        dp[i][0] %= mod;
-
-        dp[i][1] = (b[i]!=a[i-1])? dp[i-1][0] : 0;
-        dp[i][1] += (b[i]!=b[i-1])? dp[i-1][1] : 0;
-        dp[i][1] %= mod;
+    for(int i=0;i<t;i++){
+        cin >> n >> d >> k;
     }
-
-    cout << (dp[n-1][0] + dp[n-1][1]) % mod << endl;
-
-    return 0;
 }
